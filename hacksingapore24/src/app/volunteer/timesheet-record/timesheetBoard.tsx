@@ -17,7 +17,7 @@ type Record = {
     hours: number;
     otherDetails: string;
     attendance: "Approved" | "Pending" | "Rejected";
-    feedback: string;
+    feedback: any;
 };
 
 const records: Record[] = [
@@ -27,7 +27,7 @@ const records: Record[] = [
         hours: 3,
         otherDetails: "Helped the elderly",
         attendance: "Approved",
-        feedback: "Good job!",
+        feedback: <p>Complete</p>,
     },
     {
         organisation: "Organisation2",
@@ -35,7 +35,7 @@ const records: Record[] = [
         hours: 4,
         otherDetails: "Taught children",
         attendance: "Pending",
-        feedback: "Keep up the good work!",
+        feedback: <p>Complete</p>,
     },
     {
         organisation: "Organisation3",
@@ -43,7 +43,7 @@ const records: Record[] = [
         hours: 5,
         otherDetails: "Cleaned the beach",
         attendance: "Rejected",
-        feedback: "Please submit your attendance on time.",
+        feedback: <a className={'underline text-black/50'} href={'/volunteer/timesheet-record'}><p>[Click here for form]</p></a>,
     },
     {
         organisation: "Organisation4",
@@ -51,7 +51,7 @@ const records: Record[] = [
         hours: 6,
         otherDetails: "Planted trees",
         attendance: "Approved",
-        feedback: "Excellent work!",
+        feedback: <p>Pending</p>,
     },
     {
         organisation: "Organisation5",
@@ -59,9 +59,10 @@ const records: Record[] = [
         hours: 7,
         otherDetails: "Distributed food",
         attendance: "Pending",
-        feedback: "Awaiting approval.",
+        feedback: <p>Pending</p>,
     },
 ];
+
 export function TimesheetBoard() {
     return (
         <div className={'flex-col bg-hack-200 rounded-3xl p-10 justify-between'}>
@@ -91,8 +92,8 @@ export function TimesheetBoard() {
                     <TableRow key={job.organisation}>
                         <TableCell className="font-medium">{job.organisation}</TableCell>
                         <TableCell>{job.date}</TableCell>
-                        <TableCell>{job.otherDetails}</TableCell>
                         <TableCell>{job.hours}</TableCell>
+                        <TableCell>{job.otherDetails}</TableCell>
                         <TableCell>{job.attendance}</TableCell>
                         <TableCell>{job.feedback}</TableCell>
 
