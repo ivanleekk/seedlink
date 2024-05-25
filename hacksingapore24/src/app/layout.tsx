@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+
 import { Open_Sans } from "next/font/google";
+import { Inter, Public_Sans, Open_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import React from "react";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
+const publicSans = Public_Sans({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "HackSingapore 2024",
@@ -17,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${openSans.className}`}>
+    <html lang="en" className={"flex flex-col"}>
+      <body className={publicSans.className}>
       <Header/>
       {children}
       </body>
