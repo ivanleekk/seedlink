@@ -2,6 +2,8 @@ import Image from "next/image";
 import IntroText from "@/components/IntroText";
 import PromoImages from "@/components/ui/PromoImages";
 import Contacts from "@/components/ui/contacts";
+import Link from "next/link";
+import {Button} from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -11,8 +13,12 @@ export default function Home() {
                 <IntroText/>
                 <Contacts/>
             </div>
-            <div className={`flex flex-col justify-center`}>
+            <div className={`flex flex-col justify-center space-y-2`}>
                 <PromoImages/>
+                {/*Change to link once next page done*/}
+                <div className="flex min-w-max justify-center">
+                    <Button>JOIN NOW</Button>
+                </div>
             </div>
             </div>
     </main>
