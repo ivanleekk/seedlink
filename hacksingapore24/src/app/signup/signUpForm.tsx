@@ -11,19 +11,20 @@ import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {cn} from "@/lib/utils";
 import {Check, ChevronsUpDown} from "lucide-react";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
-import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
-import {auth} from "@/lib/firebase";
+import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {app, auth} from "@/lib/firebase";
+import {router} from "next/client";
+import { useRouter } from 'next/navigation'
+import {doc, getFirestore, setDoc, updateDoc} from "@firebase/firestore";
 
 
-
-const userEnum = z.enum(["user", "organisation"])
+const userEnum = z.enum(["volunteer", "organisation"])
 const userTypes = [
-    { label: "User", value: "user" },
+    { label: "Volunteer", value: "volunteer" },
     { label: "Organisation", value: "organisation" },
 ] as const
 type UserEnum = z.infer<typeof userEnum>
 const formSchema = z.object({
-    Name: z.string().min(2).max(50),
     Email: z.string().email(),
     Password: z.string().min(8).max(50),
     ConfirmPassword: z.string().min(8).max(50),
@@ -31,15 +32,15 @@ const formSchema = z.object({
 })
 
 export default function SignUpForm() {
+    const router = useRouter()
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            Name: "",
             Email: "",
             Password: "",
             ConfirmPassword: "",
-            UserType: "user"
+            UserType: "volunteer"
         },
     })
 
@@ -47,33 +48,40 @@ export default function SignUpForm() {
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
         // firebase auth
         createUserWithEmailAndPassword(auth, values.Email, values.Password)
-            .then((userCredential) => {
+            .then(async (userCredential: { user: any; }) => {
                 // Signed up
-                const user = userCredential.user;
-                // ...
+                //sign in
+                signInWithEmailAndPassword(auth, values.Email, values.Password)
+                const db = getFirestore(app);
+                console.log({
+                    ...JSON.parse(JSON.stringify(auth.currentUser)),
+                    Type: values.UserType
+                })
+                await setDoc(doc(db, "users", auth.currentUser.uid), {
+                    ...JSON.parse(JSON.stringify(auth.currentUser)),
+                    Type: values.UserType
+                });
+                // redirect to additional info page
+                if (values.UserType === "volunteer") {
+                router.push("/signup/additional-info")
+                }
+                else {
+                    router.push("/signup/additional-info-org")
+                }
             })
-            .catch((error) => {
+            .catch((error: any) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // ..
             });
+        console.log(auth.currentUser)
     }
     //TODO: make the confirm password field work
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField name={"Name"} render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                            <Input {...field} />
-                        </FormControl>
-                        <FormDescription>Enter your full name</FormDescription>
-                    </FormItem>
-                )} />
                 <FormField name={"Email"} render={({ field }) => (
                     <FormItem>
                         <FormLabel>Email</FormLabel>
@@ -90,6 +98,7 @@ export default function SignUpForm() {
                             <Input {...field} type={"password"} />
                         </FormControl>
                         <FormDescription>Enter your password</FormDescription>
+                        <FormDescription>Minimum length: 8 characters</FormDescription>
                     </FormItem>
                 )} />
                 <FormField name={"ConfirmPassword"} render={({ field }) => (
