@@ -85,10 +85,10 @@ const organisationComponents: { title: string; href: string; description: string
             "Add new volunteering opportunities.",
     },
     {
-        title: "Calender (Schedule)",
-        href: "/organisation/calender",
+        title: "Calendar (Schedule)",
+        href: "/organisation/calendar",
         description:
-            "Look at your volunteers' schedule.",
+            "Look at your event schedule.",
     },
     {
         title: "Attendance List",
@@ -99,7 +99,7 @@ const organisationComponents: { title: string; href: string; description: string
         title: "Contact User",
         href: "/organisation/contact-user",
         description:
-            "Contact the users helping you out.",
+            "Contact the volunteers helping you out.",
     },
     {
         title: "FAQ & QnA Portal",
