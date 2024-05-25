@@ -61,6 +61,8 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+
+
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -83,7 +85,8 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),
+    require('daisyui'),],
 } satisfies Config
 
 export default config
