@@ -12,8 +12,9 @@ import {cn} from "@/lib/utils";
 import {Check, ChevronsUpDown} from "lucide-react";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import {auth} from "@/lib/firebase";
+import {app, auth} from "@/lib/firebase";
 import {useRouter} from "next/navigation";
+import {doc, getDoc, getFirestore} from "@firebase/firestore";
 
 const formSchema = z.object({
     Email: z.string().email(),
@@ -36,10 +37,29 @@ export default function LoginForm() {
         // ✅ This will be type-safe and validated.
         console.log(values)
         // firebase auth
-        signInWithEmailAndPassword(auth, values.Email, values.Password).then(() => console.log("logged in")).catch(console.error)
-        // redirect to dashboard
+        signInWithEmailAndPassword(auth, values.Email, values.Password)
+            .then(() => console.log("logged in"))
+            .then(() => {
+                    // check user type from firebase
+                    const db = getFirestore(app);
+                    const docRef = doc(db, "users", auth.currentUser.uid);
+                    const userTypes = getDoc(docRef).then((document) => {
+                        if (document.exists()) {
+                            return document.data().Type;
+                        }
+                    }).then((userType: any) => {
+                        if (userType === 'volunteer') {
+                            router.push('/volunteer')
+                        } else {
+                            router.push('/organisation/dashboard')
+                        }
+                    })
+                        .catch(console.error)
+                    // redirect to dashboard
 
-        router.push('/volunteer')
+
+                }
+            )
     }
 
     return (
