@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card"
 import {Button, buttonVariants} from "@/components/ui/button";
 import { CiCircleAlert } from "react-icons/ci";
+import { CiCalendarDate } from "react-icons/ci";
 
 
 const volunteeringOpportunities = [
@@ -49,6 +50,7 @@ export default function ForYouCard() {
             </CardHeader>
             <CardContent>
                 {volunteeringOpportunities.map((opportunity, index) => (
+                    <div key={index} className={'flex flex-row  justify-between'}>
                     <p key={index}>
                         <b>{opportunity.organisation}</b>
                         <br/>
@@ -56,6 +58,12 @@ export default function ForYouCard() {
                         <br/>
                         <br/>
                     </p>
+                        <Button className={buttonVariants({variant: "default"})}>
+                            <CiCalendarDate/>
+                            <span className={"w-1"}/>
+                            Book a Timeslot
+                        </Button>
+                    </div>
                 ))}
             </CardContent>
         </Card>
@@ -70,7 +78,7 @@ export default function ForYouCard() {
                         <p key={index}>
                             <b>({index + 1}) {feedback.organisation}</b>
                             <br/>
-                            {feedback.description}
+                            <u>{feedback.description}</u>
                             <br/>
                             <br/>
                         </p>

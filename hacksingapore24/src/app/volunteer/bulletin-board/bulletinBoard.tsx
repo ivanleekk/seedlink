@@ -8,12 +8,13 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { CiFilter } from "react-icons/ci";
 
 const jobs = [
     {
         organisation: "Organisation1",
         rating: "4.5",
-        volunteeringLocation: "Singapore",
+        volunteeringLocation: "Bedok",
         volunteeringDescription: "Help the elderly",
         volunteeringPeriod: "May-Aug",
         requiredSkills: "Compassion, Patience",
@@ -22,7 +23,7 @@ const jobs = [
     {
         organisation: "Organisation2",
         rating: "4.7",
-        volunteeringLocation: "Singapore",
+        volunteeringLocation: "Clementi",
         volunteeringDescription: "Teach children",
         volunteeringPeriod: "Jun-Sep",
         requiredSkills: "Teaching, Patience",
@@ -31,7 +32,7 @@ const jobs = [
     {
         organisation: "Organisation3",
         rating: "4.2",
-        volunteeringLocation: "Singapore",
+        volunteeringLocation: "Woodlands",
         volunteeringDescription: "Clean the beach",
         volunteeringPeriod: "Jul-Oct",
         requiredSkills: "Physical strength, Environmental awareness",
@@ -40,7 +41,7 @@ const jobs = [
     {
         organisation: "Organisation4",
         rating: "4.8",
-        volunteeringLocation: "Singapore",
+        volunteeringLocation: "Pasir Ris",
         volunteeringDescription: "Plant trees",
         volunteeringPeriod: "Aug-Nov",
         requiredSkills: "Physical strength, Environmental awareness",
@@ -49,7 +50,7 @@ const jobs = [
     {
         organisation: "Organisation5",
         rating: "4.6",
-        volunteeringLocation: "Singapore",
+        volunteeringLocation: "Tanjong Pagar",
         volunteeringDescription: "Food distribution",
         volunteeringPeriod: "Sep-Dec",
         requiredSkills: "Compassion, Organizational skills",
@@ -60,11 +61,15 @@ const jobs = [
 export function BulletinBoard() {
     return (
         <div className={'flex-col bg-hack-200 rounded-3xl p-10'}>
-        <h1 className={'text-3xl'}>Bulletin Board</h1>
+            <div className={'flex flex-row space-y-2 pl-2 pb-4'}>
+                <h1 className={'text-3xl'}>Bulletin Board</h1>
+                <span className={'w-1.5'}></span>
+                <CiFilter className={'my-auto size-5'}/>
+            </div>
 
-    <Table>
-        <TableHeader>
-        <TableRow>
+            <Table>
+                <TableHeader>
+                    <TableRow>
                     <TableHead>Organisation</TableHead>
                     <TableHead>Rating</TableHead>
                     <TableHead>Description</TableHead>
@@ -81,7 +86,7 @@ export function BulletinBoard() {
                         <TableCell className="font-medium">{job.organisation}</TableCell>
                         <TableCell>{job.rating}</TableCell>
                         <TableCell>{job.volunteeringDescription}</TableCell>
-                        <TableCell className="text-right">{job.volunteeringLocation}</TableCell>
+                        <TableCell>{job.volunteeringLocation}</TableCell>
                         <TableCell>{job.volunteeringPeriod}</TableCell>
                         <TableCell>{job.requiredSkills}</TableCell>
                         <TableCell>{job.vacancy}</TableCell>
