@@ -11,7 +11,7 @@ export default function VolunteerPage() {
                 <p className="text-lg font-bold text-center text-white">10 MORE LEAVES TO REACH SPROUT!</p>
             </div>
             <div className="flex flex-col justify-center w-full h-max fixed space-y-2 mx-auto top-40">
-                <Image src="/seedlink.svg" alt="picture" width={200} height={150} className="justify-center mx-auto"/>
+                <Image src="/volunteer/copy_header.webp" alt="picture" width={400} height = {150} className="justify-center mx-auto"/>
                 <h1 className="justify-center min-w-max mx-auto text-2xl font-bold">~ SWIPE AWAY! ~</h1>
                 <div className="flex flex-row justify-center h-max w-[100%] space-y-2 mx-auto items-center">
                     <NoThanksArrow />
