@@ -19,8 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={"flex flex-col"}>
-      <body className={`${publicSans.className} bg-[url("/bg-img.webp")] flex flex-col space-y-20`}>
+
+      <body className={`${publicSans.className} bg-fixed bg-[url("/bg-img.webp")]`}>
+
       <Header/>
       {children}
       </body>

@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import JobProfile from "@/app/volunteer/jobProfile";
 import NoThanksArrow from "@/app/volunteer/noThanksArrow";
@@ -10,7 +12,7 @@ export default function VolunteerPage() {
                 <p className="text-lg font-bold text-center text-white">MEMBERSHIP: SEED</p>
                 <p className="text-lg font-bold text-center text-white">10 MORE LEAVES TO REACH SPROUT!</p>
             </div>
-            <div className="flex flex-col justify-center w-full h-max fixed space-y-2 mx-auto top-40">
+            <div className="flex flex-col sticky justify-center w-full h-max space-y-2 mx-auto top-40">
                 <Image src="/volunteer/copy_header.webp" alt="picture" width={400} height = {150} className="justify-center mx-auto"/>
                 <h1 className="justify-center min-w-max mx-auto text-2xl font-bold">~ SWIPE AWAY! ~</h1>
                 <div className="flex flex-row justify-center h-max w-[100%] space-y-2 mx-auto items-center">
