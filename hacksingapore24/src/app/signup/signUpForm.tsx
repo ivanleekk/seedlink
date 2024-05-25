@@ -82,6 +82,7 @@ export default function SignUpForm() {
                             <Input {...field} type={"password"} />
                         </FormControl>
                         <FormDescription>Enter your password</FormDescription>
+                        <FormDescription>Minimum length: 8 characters</FormDescription>
                     </FormItem>
                 )} />
                 <FormField name={"ConfirmPassword"} render={({ field }) => (
