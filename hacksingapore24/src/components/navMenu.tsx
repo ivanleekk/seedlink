@@ -40,7 +40,7 @@ const volunteerComponents: { title: string; href: string; description: string }[
     },
     {
         title: "Points and Metrics",
-        href: "/volunteer/points",
+        href: "/volunteer/dashboard",
         description:
             "Check your points and volunteering metrics.",
     },
@@ -74,7 +74,7 @@ const volunteerComponents: { title: string; href: string; description: string }[
 const organisationComponents: { title: string; href: string; description: string }[] = [
     {
         title: "Home",
-        href: "/organisation",
+        href: "/organisation/dashboard",
         description:
             "Organisation Home Page.",
     },
