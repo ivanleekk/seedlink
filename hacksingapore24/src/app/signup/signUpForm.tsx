@@ -160,7 +160,7 @@ export default function SignUpForm() {
                         <FormDescription>Choose your user type</FormDescription>
                     </FormItem>
                 )} />
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Sign Up</Button>
             </form>
         </Form>
     )
