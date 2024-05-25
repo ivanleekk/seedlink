@@ -21,6 +21,25 @@ export default function PlantStage(props: {complete:boolean, stage:number}) {
         }
     }
 
+    const noOfLeaves = () => {
+        switch (props.stage){
+            case 1:
+                return("0-10")
+            case 2:
+                return("11-50")
+            case 3:
+                return("51-70")
+            case 4:
+                return("71-90")
+            case 5:
+                return("91-150")
+            case 6:
+                return(">150")
+            default:
+                return null
+        }
+    }
+
     return(
         <div className="grid-cols-1 mx-auto justify-center">
             <div className={clsx("rounded-xl justify-center w-36 ml-2",
@@ -35,7 +54,8 @@ export default function PlantStage(props: {complete:boolean, stage:number}) {
             <div className="justify-center">
                 <Image src={`/plantStageNames/${Stage()}.webp`} alt="Image" width = {160} height = {60}/>
             </div>
-            <div className="rounded-xl bg-hack-400 justify-center w-36 h-12 object-center ml-2">
+            <div className="rounded-xl bg-hack-400 justify-center w-36 h-16 object-center py-1 ml-2">
+                <p className="text-center text-xl font-bold text-white">{noOfLeaves()}</p>
                 <p className="font-bold text-lg text-center text-white">LEAVES</p>
             </div>
         </div>
