@@ -61,6 +61,7 @@ export default function SignUpForm() {
                 const errorMessage = error.message;
                 // ..
             });
+        console.log(auth.currentUser)
     }
     //TODO: make the confirm password field work
     return (

@@ -14,6 +14,10 @@ import { useRouter } from 'next/navigation'
 import {useState} from "react";
 import MultiSelectFormField from "@/components/ui/multi-select";
 import {Input} from "@/components/ui/input";
+import {doc, getFirestore, setDoc, updateDoc} from "@firebase/firestore";
+import {app, auth} from "@/lib/firebase";
+import {update} from "@firebase/database";
+
 
 const genderEnum = z.enum(["Male", "Female", "Other"])
 const genderTypes = [
@@ -70,10 +74,26 @@ const languageProficiencyTypes = [
     { label: "Cantonese", value: "cantonese"},
     { label: "Teochew", value: "teochew"},
 ] as const
+const locationEnum = z.enum(["North", "South", "East", "West", "Central"])
+const locationTypes = [
+    { label: "North", value: "north" },
+    { label: "South", value: "south"},
+    { label: "East", value: "east"},
+    { label: "West", value: "west"},
+    { label: "Central", value: "central"},
+] as const
+const locationArr = [
+    { label: "North", value: "north" },
+    { label: "South", value: "south"},
+    { label: "East", value: "east"},
+    { label: "West", value: "west"},
+    { label: "Central", value: "central"},
+]
 const formSchema = z.object({
+    Name: z.string(),
     Gender: z.string(),
     Religion: z.string(),
-    Skills: z.set(),
+    // Skills: z.set(),
     // LanguageProficiency: z.array(),
     // Experience: z.string(),
 })
@@ -84,27 +104,42 @@ export default function AdditionalInfoForm() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
+            Name: "",
             Gender: "",
             Religion: "",
-            Skills: "",
+            // Skills: "",
             // LanguageProficiency: "",
             // Experience: ""
         },
     })
-
+    const db = getFirestore(app);
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log("hi")
         console.log(values)
         // send to firestore
+        console.log(auth.currentUser.uid)
+        await updateDoc(doc(db, "users", auth.currentUser.uid), {
+            Name: values.Name,
+            Gender: values.Gender,
+            Religion: values.Religion,
+        });
     }
 
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField name={"Gender"} render={({ field }) => (
+                <FormField name={"Name"} render={({field}) => (
+                    <FormItem>
+                        <FormLabel>Name</FormLabel>
+                        <br/>
+                        <Input {...field}/>
+                    </FormItem>
+
+                )}/>
+                <FormField name={"Gender"} render={({field}) => (
                     <FormItem>
                         <FormLabel>Gender</FormLabel>
                         <br/>
@@ -124,13 +159,13 @@ export default function AdditionalInfoForm() {
                                                 (genderType) => genderType.value === field.value
                                             )?.label
                                             : "Select Gender"}
-                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
                                     </Button>
                                 </FormControl>
                             </PopoverTrigger>
                             <PopoverContent className="w-[200px] p-0">
                                 <Command>
-                                    <CommandInput placeholder="Search..." />
+                                    <CommandInput placeholder="Search..."/>
                                     <CommandEmpty>Nothing found.</CommandEmpty>
                                     <CommandGroup>
                                         <CommandList>
@@ -162,8 +197,8 @@ export default function AdditionalInfoForm() {
                         </Popover>
                     </FormItem>
 
-                )} />
-                <FormField name={"Religion"} render={({ field }) => (
+                )}/>
+                <FormField name={"Religion"} render={({field}) => (
                     <FormItem>
                         <FormLabel>Religion</FormLabel>
                         <br/>
@@ -183,13 +218,13 @@ export default function AdditionalInfoForm() {
                                                 (religionType) => religionType.value === field.value
                                             )?.label
                                             : "Select Religion"}
-                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                                        <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
                                     </Button>
                                 </FormControl>
                             </PopoverTrigger>
                             <PopoverContent className="w-[200px] p-0">
                                 <Command>
-                                    <CommandInput placeholder="Search..." />
+                                    <CommandInput placeholder="Search..."/>
                                     <CommandEmpty>Nothing found.</CommandEmpty>
                                     <CommandGroup>
                                         <CommandList>
@@ -221,41 +256,46 @@ export default function AdditionalInfoForm() {
                         </Popover>
                     </FormItem>
 
-                )} />
-                <FormField control={form.control} name={"Skills"} render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Skills</FormLabel>
-                    <MultiSelectFormField
-                        options={skillsArr}
-                        onValueChange={field.onChange}
-                        placeholder="Select options"
-                        variant="inverted"
-                    />
-                    </FormItem>
-                )} />
-                {/*<FormField control={form.control} name={"LanguageProficiency"} render={({ field }) => (*/}
-                {/*    <FormItem>*/}
-                {/*        <FormLabel>Language Proficiency</FormLabel>*/}
+                )}/>
+                <br/>
+                <FormLabel>Skills</FormLabel>
+                <MultiSelectFormField
+                    options={skillsArr}
+                    onValueChange={() => {
+                    }}
+                    placeholder="Select options"
+                />
+                <br/>
+                <FormLabel>Language Proficiency</FormLabel>
 
-                {/*    <MultiSelectFormField*/}
-                {/*        options={languageProficiencyArr}*/}
-                {/*        defaultValue={field.value}*/}
-                {/*        onValueChange={field.onChange}*/}
-                {/*        placeholder="Select options"*/}
-                {/*        variant="inverted"*/}
-                {/*    />*/}
-                {/*        </FormItem>*/}
-                {/*)} />*/}
-                {/*<FormField name={"Experience"} render={({ field }) => (*/}
-                {/*    <FormItem>*/}
-                {/*        <FormLabel>Previous Experience</FormLabel>*/}
-                {/*        <FormControl>*/}
-                {/*            <Input {...field} />*/}
-                {/*        </FormControl>*/}
-                {/*    </FormItem>*/}
-                {/*)} />*/}
+                <MultiSelectFormField
+                    options={languageProficiencyArr}
+                    defaultValue={""}
+                    onValueChange={() => {
+                    }}
+                    placeholder="Select options"
+                />
+                <br/>
+
+                <FormLabel>Location Preference</FormLabel>
+                <MultiSelectFormField
+                    options={locationArr}
+                    defaultValue={""}
+                    onValueChange={() => {
+                    }}
+                    placeholder="Select options"
+                />
+                <br/>
+
+                <FormLabel>Previous Experience</FormLabel>
+                <FormControl>
+                    <Input/>
+                </FormControl>
+
+
                 <Button type="submit">Submit</Button>
             </form>
+
         </Form>
     )
 }
