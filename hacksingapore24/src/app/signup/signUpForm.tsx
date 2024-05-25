@@ -13,17 +13,17 @@ import {Check, ChevronsUpDown} from "lucide-react";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
 import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
 import {auth} from "@/lib/firebase";
+import {router} from "next/client";
+import { useRouter } from 'next/navigation'
 
 
-
-const userEnum = z.enum(["user", "organisation"])
+const userEnum = z.enum(["volunteer", "organisation"])
 const userTypes = [
-    { label: "User", value: "user" },
+    { label: "Volunteer", value: "volunteer" },
     { label: "Organisation", value: "organisation" },
 ] as const
 type UserEnum = z.infer<typeof userEnum>
 const formSchema = z.object({
-    Name: z.string().min(2).max(50),
     Email: z.string().email(),
     Password: z.string().min(8).max(50),
     ConfirmPassword: z.string().min(8).max(50),
@@ -31,15 +31,15 @@ const formSchema = z.object({
 })
 
 export default function SignUpForm() {
+    const router = useRouter()
     // 1. Define your form.
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            Name: "",
             Email: "",
             Password: "",
             ConfirmPassword: "",
-            UserType: "user"
+            UserType: "volunteer"
         },
     })
 
@@ -50,12 +50,13 @@ export default function SignUpForm() {
         console.log(values)
         // firebase auth
         createUserWithEmailAndPassword(auth, values.Email, values.Password)
-            .then((userCredential) => {
+            .then((userCredential: { user: any; }) => {
                 // Signed up
                 const user = userCredential.user;
-                // ...
+                // redirect to additional info page
+                router.push("/signup/additional-info")
             })
-            .catch((error) => {
+            .catch((error: any) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 // ..
@@ -65,15 +66,6 @@ export default function SignUpForm() {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <FormField name={"Name"} render={({ field }) => (
-                    <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                            <Input {...field} />
-                        </FormControl>
-                        <FormDescription>Enter your full name</FormDescription>
-                    </FormItem>
-                )} />
                 <FormField name={"Email"} render={({ field }) => (
                     <FormItem>
                         <FormLabel>Email</FormLabel>
