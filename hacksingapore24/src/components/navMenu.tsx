@@ -82,7 +82,7 @@ const organisationComponents: { title: string; href: string; description: string
         title: "Add to Bulletin Board",
         href: "/organisation/bulletin-board",
         description:
-            "Add new new volunteering opportunities.",
+            "Add new volunteering opportunities.",
     },
     {
         title: "Calender (Schedule)",
@@ -94,12 +94,6 @@ const organisationComponents: { title: string; href: string; description: string
         title: "Attendance List",
         href: "/organisation/attendance",
         description: "View your attendance list.",
-    },
-    {
-        title: "Points and Metrics",
-        href: "/organisation/points",
-        description:
-            "Check your points and volunteering metrics.",
     },
     {
         title: "Contact User",
