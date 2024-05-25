@@ -113,19 +113,24 @@ export default function AdditionalInfoForm() {
         },
     })
     const db = getFirestore(app);
+
     // 2. Define a submit handler.
     async function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         // send to firestore
-        if (auth.currentUser.exists()) {
-            await updateDoc(doc(db, "users", auth.currentUser.uid), {
-                Name: values.Name,
-                Gender: values.Gender,
-                Religion: values.Religion,
-            });
-        }
+
+        await updateDoc(doc(db, "users", auth.currentUser.uid), {
+            Name: values.Name,
+            Gender: values.Gender,
+            Religion: values.Religion,
+        }).then(() => {
+            router.push('/volunteer')
+        }).catch((error) => {
+            console.log(error)
+        });
     }
+
 
     return (
         <Form {...form}>
