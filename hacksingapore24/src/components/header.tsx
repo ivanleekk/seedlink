@@ -4,9 +4,9 @@ import {Button, buttonVariants} from "@/components/ui/button"
 import Link from "next/link";
 import { CiLogin } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
-import { Alegreya_SC } from "@next/font/google";
+// import { Alegreya_SC } from "@next/font/google";
 
-const alegreya = Alegreya_SC({subsets: ["latin"], weight: "700"});
+// const alegreya = Alegreya_SC({subsets: ["latin"], weight: "700"});
 
 export default function Header() {
     return (
@@ -14,8 +14,8 @@ export default function Header() {
 
             <div className="flex flex-row px-4 py-4">
                 <a className="mr-auto flex flex-row" href={'/'}>
-                    <Image className="mr-4" src="/seedlink.svg" alt="HackSingapore 2024" width={100} height={100}/>
-                    <h1 className={`text-5xl font-bold text-gray-800 justify-end my-auto ${alegreya.className}`}>SeedLink</h1>
+                    <Image className="mr-4" src="/seedlink.webp" alt="HackSingapore 2024" width={200} height={100}/>
+                    {/*<h1 className={`text-5xl font-bold text-gray-800 justify-end my-auto ${alegreya.className}`}>SeedLink</h1>*/}
                 </a>
 
 

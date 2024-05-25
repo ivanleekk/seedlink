@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Public_Sans, Open_Sans } from "next/font/google";
+import { Inter, Public_Sans, Open_Sans} from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
 import React from "react";
@@ -19,6 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+
     <html lang="en" className={"flex flex-col"}>
       <body className={`${publicSans.className} bg-fixed bg-[url("/bg-img.webp")] space-y-20`}>
       <Header/>
