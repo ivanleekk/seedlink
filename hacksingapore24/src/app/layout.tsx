@@ -21,8 +21,9 @@ export default function RootLayout({
   return (
 
     <html lang="en" className={"flex flex-col"}>
-      <body className={`${publicSans.className} bg-fixed bg-[url("/bg-img.webp")] space-y-20`}>
+      <body className={`${publicSans.className} bg-fixed bg-[url("/bg-img.webp")] mb-32`}>
       <Header/>
+      <br/>
       {children}
       </body>
     </html>
