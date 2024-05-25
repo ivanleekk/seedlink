@@ -11,86 +11,38 @@ import { CiCircleAlert } from "react-icons/ci";
 import { CiCalendarDate } from "react-icons/ci";
 
 
-const volunteeringOpportunities = [
-    {
-        organisation: "Organisation1",
-        description: "Help the elderly",
-    },
-    {
-        organisation: "Organisation2",
-        description: "Teach children",
-    },
-    {
-        organisation: "Organisation3",
-        description: "Clean the beach",
-    },
-];
-
-const feedbacks = [
-    {
-        organisation: "Organisation1",
-        description: "Feedback for helping the elderly event",
-    },
-    {
-        organisation: "Organisation2",
-        description: "Feedback for teaching children event",
-    },
-    {
-        organisation: "Organisation3",
-        description: "Feedback for beach cleaning event",
-    },
-];
-
 export default function RemindersCard() {
     return (
         <div className={'text-wrap'}>
         <Card>
             <CardHeader>
-                <CardTitle>Remember to make bookings for the following:</CardTitle>
+                <CardTitle>[NOW] You have an upcoming event to attend at Organisation 2:</CardTitle>
             </CardHeader>
             <CardContent>
-                {volunteeringOpportunities.map((opportunity, index) => (
-                    <div key={index} className={'flex flex-row  justify-between'}>
-                    <p key={index}>
-                        <b>{opportunity.organisation}</b>
-                        <br/>
-                        {opportunity.description}
-                        <br/>
-                        <br/>
-                    </p>
-                        <Button className={buttonVariants({variant: "default"})}>
-                            <CiCalendarDate/>
-                            <span className={"w-1"}/>
-                            Book a Timeslot
-                        </Button>
-                    </div>
-                ))}
+
+                Date: 30th May 2024 <br/>
+                Timeslot Booked: 9am-12pm <br/>
+                Notes: Bring IC for verification
             </CardContent>
         </Card>
             <br/>
             <Card>
                 <CardHeader>
-                    <CardTitle>Remember to submit your feedback for the following:
+                    <CardTitle className={'text-error'}>WARNING
                     </CardTitle>
                 </CardHeader>
                 <CardContent>
-                    {feedbacks.map((feedback, index) => (
-                        <p key={index}>
-                            <b>({index + 1}) {feedback.organisation}</b>
-                            <br/>
-                            <u>{feedback.description}</u>
-                            <br/>
-                            <br/>
-                        </p>
-                    ))}
+                    Based on your bookings, you have accumulated a total of 15 points this month (May 2024)!<br/>
+                    <br/>
+
+                    To maintain your silver membership status, you need another 10 points by the end of June (30 June
+                    2024).<br/>
+                    <br/>
+
+                    <b>NOTE</b>: Cancel bookings if you cannot make it, else, a red flag will be added to your name for the
+                    next 3 months!
                 </CardContent>
-                <CardFooter>
-                    <Button className={buttonVariants({variant: "default"})}>
-                        <CiCircleAlert/>
-                        <span className={"w-1"}/>
-                        Click here to access full announcement
-                    </Button>
-                </CardFooter>
+
             </Card>
         </div>
     )
