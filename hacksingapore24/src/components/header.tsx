@@ -12,9 +12,11 @@ export default function Header() {
     return (
         <header className="bg-hack-100 fixed top-0 left-0 right-0">
             <div className="flex flex-row px-4 py-4">
+                <a className="mr-auto flex flex-row" href={'/'}>
+                    <Image className="mr-4" src="/seedlink.svg" alt="HackSingapore 2024" width={100} height={100}/>
+                    <h1 className={`text-5xl font-bold text-gray-800 justify-end my-auto ${alegreya.className}`}>SeedLink</h1>
+                </a>
 
-                <Image className="mr-4" src="/seedlink.svg" alt="HackSingapore 2024" width={100} height={100}/>
-                <h1 className={`text-5xl font-bold text-gray-800 mr-auto justify-end my-auto ${alegreya.className}`}>SeedLink</h1>
 
                 <Input className="justify-end w-56 mr-4 bg-white my-auto" type={"search"} placeholder={"Search"}/>
 
