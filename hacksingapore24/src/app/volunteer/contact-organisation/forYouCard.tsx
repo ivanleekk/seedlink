@@ -78,7 +78,7 @@ export default function ForYouCard() {
                         <p key={index}>
                             <b>({index + 1}) {feedback.organisation}</b>
                             <br/>
-                            <a href={'/volunteer/bulletin-board'}><u>{feedback.description}</u></a>
+                            <u>{feedback.description}</u>
                             <br/>
                             <br/>
                         </p>
