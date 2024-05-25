@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={"flex flex-col"}>
-      <body className={`${publicSans.className} bg-[url("/bg-img.webp")] flex flex-col`}>
+      <body className={`${publicSans.className} bg-[url("/bg-img.webp")] flex flex-col space-y-20`}>
       <Header/>
       {children}
       </body>
