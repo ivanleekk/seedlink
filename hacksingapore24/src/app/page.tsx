@@ -8,7 +8,7 @@ import {Button} from "@/components/ui/button";
 export default function Home() {
   return (
       <main className="flex min-h-screen flex-col justify-between p-24 align-middle">
-          <div className={`flex fixed flex-row left-5 max-w-[45%] align-middle`}>
+          <div className={`flex fixed flex-row left-[2.5%] max-w-[45%] align-middle`}>
               <div className={`flex flex-col justify-center`}>
                   <IntroText/>
                   <Contacts/>
