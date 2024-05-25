@@ -33,9 +33,13 @@ export default function volunteerDashboardPage() {
                 </div>
                 <div className="flex flex-col space-y-10 justify-center w-[35%] r-0 t-0 ml-5">
                     <p className="font-bold text-5xl text-hack-400 text-center w-full">Points and Metrics</p>
-                    <div className="flex flex-col bg-hack-300 rounded-xl justify-center">
+                    <div className="flex flex-col bg-hack-300 rounded-xl justify-center space-y-5 p-5">
+                        <div className="flex py-5 bg-hack-200 rounded-xl">
                         <Image src="/placeholder_graphs/g1.webp" alt="placeholder 1" width={500} height={200}/>
+                        </div>
+                        <div className="flex py-5 bg-hack-200 rounded-xl">
                         <Image src="/placeholder_graphs/g2.webp" alt="placeholder 2" width={500} height={200}/>
+                        </div>
                     </div>
                 </div>
             </div>
