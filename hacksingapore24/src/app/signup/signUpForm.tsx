@@ -11,10 +11,11 @@ import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {cn} from "@/lib/utils";
 import {Check, ChevronsUpDown} from "lucide-react";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
-import {createUserWithEmailAndPassword, getAuth} from "firebase/auth";
-import {auth} from "@/lib/firebase";
+import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {app, auth} from "@/lib/firebase";
 import {router} from "next/client";
 import { useRouter } from 'next/navigation'
+import {doc, getFirestore, setDoc, updateDoc} from "@firebase/firestore";
 
 
 const userEnum = z.enum(["volunteer", "organisation"])
@@ -47,14 +48,28 @@ export default function SignUpForm() {
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
         // firebase auth
         createUserWithEmailAndPassword(auth, values.Email, values.Password)
-            .then((userCredential: { user: any; }) => {
+            .then(async (userCredential: { user: any; }) => {
                 // Signed up
-                const user = userCredential.user;
+                //sign in
+                signInWithEmailAndPassword(auth, values.Email, values.Password)
+                const db = getFirestore(app);
+                console.log({
+                    ...JSON.parse(JSON.stringify(auth.currentUser)),
+                    Type: values.UserType
+                })
+                await setDoc(doc(db, "users", auth.currentUser.uid), {
+                    ...JSON.parse(JSON.stringify(auth.currentUser)),
+                    Type: values.UserType
+                });
                 // redirect to additional info page
+                if (values.UserType === "volunteer") {
                 router.push("/signup/additional-info")
+                }
+                else {
+                    router.push("/signup/additional-info-org")
+                }
             })
             .catch((error: any) => {
                 const errorCode = error.code;
