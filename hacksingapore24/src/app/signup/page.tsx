@@ -1,9 +1,17 @@
-export default function () {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div>
-        <p>hiahdkjansjlkcnbasjlcnab</p>
-      </div>
-    </main>
-  );
+import SignUpForm from "@/app/signup/signUpForm";
+
+
+
+export default function SignUp() {
+
+    return (
+        <main className="flex flex-col justify-center h-screen items-center ">
+            <div className={"w-96"}>
+                <h1 className={"text-center text-3xl flex-shrink-0"}>Create New Account</h1>
+                <h2 className="text-center">Already Registered? <a href={"/login"} className={"underline"}>Login</a></h2>
+                <br/>
+                <SignUpForm/>
+            </div>
+        </main>
+    );
 }
