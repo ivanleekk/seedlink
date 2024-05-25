@@ -17,7 +17,9 @@ export default function Home() {
                 <PromoImages/>
                 {/*Change to link once next page done*/}
                 <div className="flex min-w-max justify-center">
-                    <Button>JOIN NOW</Button>
+                    <a href={'/signup'}>
+                        <Button>JOIN NOW</Button>
+                    </a>
                 </div>
             </div>
             </div>
