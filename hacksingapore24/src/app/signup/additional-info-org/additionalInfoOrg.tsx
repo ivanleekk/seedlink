@@ -58,15 +58,19 @@ export default function AdditionalInfoOrgForm() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log("hi")
-        console.log(values)
+
         // send to firestore
-        console.log(auth.currentUser.uid)
+
         await updateDoc(doc(db, "users", auth.currentUser.uid), {
             Name: values.Name,
             Area: values.Area,
             Address: values.Address
-        });
+        }).then(() => {
+            router.push('/organisation')
+        }).catch((error) => {
+            console.error("Error updating document: ", error);
+        }
+        )
     }
 
     return (
