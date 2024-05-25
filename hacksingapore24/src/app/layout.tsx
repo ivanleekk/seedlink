@@ -20,8 +20,8 @@ export default function RootLayout({
 }>) {
   return (
 
-      <body className={`${publicSans.className} bg-fixed bg-[url("/bg-img.webp")]`}>
-
+    <html lang="en" className={"flex flex-col"}>
+      <body className={`${publicSans.className} bg-fixed bg-[url("/bg-img.webp")] space-y-20`}>
       <Header/>
       {children}
       </body>
