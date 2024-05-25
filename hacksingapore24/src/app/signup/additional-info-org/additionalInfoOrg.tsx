@@ -28,7 +28,8 @@ const locationTypes = [
 
 const formSchema = z.object({
     Name: z.string(),
-    Location: z.string(),
+    Area: z.string(),
+    Address: z.string(),
     // Gender: z.string(),
     // Religion: z.string(),
     // Skills: z.set(),
@@ -43,7 +44,8 @@ export default function AdditionalInfoOrgForm() {
         resolver: zodResolver(formSchema),
         defaultValues: {
             Name: "",
-            Location: ""
+            Area: "",
+            Address: "",
             // Gender: "",
             // Religion: "",
             // Skills: "",
@@ -62,7 +64,8 @@ export default function AdditionalInfoOrgForm() {
         console.log(auth.currentUser.uid)
         await updateDoc(doc(db, "users", auth.currentUser.uid), {
             Name: values.Name,
-            Location: values.Location
+            Area: values.Area,
+            Address: values.Address
         });
     }
 
@@ -78,9 +81,9 @@ export default function AdditionalInfoOrgForm() {
 
                 )}/>
                 
-                <FormField name={"Location"} render={({ field }) => (
+                <FormField name={"Area"} render={({ field }) => (
                     <FormItem>
-                        <FormLabel>Location</FormLabel>
+                        <FormLabel>Area</FormLabel>
                         <br/>
                         <Popover>
                             <PopoverTrigger asChild>
@@ -97,7 +100,7 @@ export default function AdditionalInfoOrgForm() {
                                             ? locationTypes.find(
                                                 (locationType) => locationType.value === field.value
                                             )?.label
-                                            : "Select Location"}
+                                            : "Select Area"}
                                         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                                     </Button>
                                 </FormControl>
@@ -114,7 +117,7 @@ export default function AdditionalInfoOrgForm() {
                                                     value={locationType.label}
                                                     key={locationType.value}
                                                     onSelect={() => {
-                                                        form.setValue("Location", locationType.value)
+                                                        form.setValue("Area", locationType.value)
                                                     }}
                                                 >
                                                     <Check
@@ -134,10 +137,17 @@ export default function AdditionalInfoOrgForm() {
                                 </Command>
                             </PopoverContent>
                         </Popover>
-                        <FormDescription>Choose your location</FormDescription>
+                        <FormDescription>Choose your Area</FormDescription>
                     </FormItem>
                 )} />
+                <FormField name={"Address"} render={({field}) => (
+                    <FormItem>
+                        <FormLabel>Address</FormLabel>
+                        <br/>
+                        <Input {...field}/>
+                    </FormItem>
 
+                )}/>
 
                 <Button type="submit">Submit</Button>
             </form>
