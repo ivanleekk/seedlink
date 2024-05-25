@@ -13,6 +13,7 @@ import {Check, ChevronsUpDown} from "lucide-react";
 import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command";
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "@/lib/firebase";
+import {useRouter} from "next/navigation";
 
 const formSchema = z.object({
     Email: z.string().email(),
@@ -28,7 +29,7 @@ export default function LoginForm() {
             Password: "",
         },
     })
-
+    const router = useRouter()
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         // Do something with the form values.
@@ -37,7 +38,8 @@ export default function LoginForm() {
         // firebase auth
         signInWithEmailAndPassword(auth, values.Email, values.Password).then(() => console.log("logged in")).catch(console.error)
         // redirect to dashboard
-        //TODO: redirect to dashboard at /home
+
+        router.push('/volunteer')
     }
 
     return (
