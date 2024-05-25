@@ -11,6 +11,7 @@ const alegreya = Alegreya_SC({subsets: ["latin"], weight: "700"});
 export default function Header() {
     return (
         <header className="bg-hack-100 sticky z-30 top-0 px-7 h-120  ">
+
             <div className="flex flex-row px-4 py-4">
                 <a className="mr-auto flex flex-row" href={'/'}>
                     <Image className="mr-4" src="/seedlink.svg" alt="HackSingapore 2024" width={100} height={100}/>
