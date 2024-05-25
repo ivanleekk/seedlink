@@ -104,11 +104,11 @@ export default function Header() {
 
 
     return (
-        <header className="bg-hack-100 sticky z-30 top-0 px-7 h-120  ">
+        <header className="bg-hack-100 sticky z-30 top-0 px-7 h-120">
 
             <div className="flex flex-row px-4 py-4">
                 {menu}
-                <a className="mr-auto flex flex-row" href={'/'}>
+                <a className="mr-auto flex flex-row ml-4" href={'/'}>
                     <Image className="mr-4" src="/seedlink.webp" alt="HackSingapore 2024" width={200} height={100}/>
                     {/*<h1 className={`text-5xl font-bold text-gray-800 justify-end my-auto ${alegreya.className}`}>SeedLink</h1>*/}
                 </a>
