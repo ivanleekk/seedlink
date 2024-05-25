@@ -28,8 +28,8 @@ const volunteerComponents: { title: string; href: string; description: string }[
             "Look out for new volunteering opportunities.",
     },
     {
-        title: "Calender (Schedule)",
-        href: "/volunteer/calender",
+        title: "Calendar (Schedule)",
+        href: "/volunteer/calendar",
         description:
             "Look at your volunteering schedule.",
     },
@@ -46,7 +46,7 @@ const volunteerComponents: { title: string; href: string; description: string }[
     },
     {
         title: "Contact Organisation",
-        href: "/volunteer/contact-organisation",
+        href: "/volunteer/timesheet-record",
         description:
             "Contact the organisations you're helping out.",
     },

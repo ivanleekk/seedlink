@@ -41,7 +41,7 @@ const feedbacks = [
     },
 ];
 
-export default function ForYouCard() {
+export default function RemindersCard() {
     return (
         <div className={'text-wrap'}>
         <Card>

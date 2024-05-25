@@ -58,7 +58,7 @@ const jobs = [
     },
 ];
 
-export function BulletinBoard() {
+export function JobBoard() {
     return (
         <div className={'flex-col bg-hack-200 rounded-3xl p-10'}>
             <div className={'flex flex-row space-y-2 pl-2 pb-4'}>
