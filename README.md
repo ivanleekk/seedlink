@@ -20,3 +20,13 @@ SeedLink serves as a one-stop platform for the public to conveniently connect wi
 1. Next.js
 2. Firebase
 3. Vercel
+
+## Testing instructions
+1. Open your internet browser of choice
+2. Open the deployment website (https://hacksingapore24.vercel.app/)
+3. Press the "log in" button
+4. Enter the following credentials:
+   - email: demo@demo.com
+   - password: 12345678
+5. Press the submit button
+6. View the various pages via the navigation menu (top left)
