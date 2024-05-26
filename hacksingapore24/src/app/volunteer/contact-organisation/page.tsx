@@ -9,6 +9,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {useRouter} from "next/navigation";
 import {signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "@/lib/firebase";
+import Image from "next/image";
 
 const formSchema = z.object({
     Organisation: z.string(),
@@ -33,7 +34,8 @@ export default function contactUsPage() {
     return(
         <main className="flex min-h-screen flex-col justify-between p-10 align-top">
             <div className="flex flex-row sticky top-32 space-y-5">
-                <div className="flex flex-col w-[60%] bg-hack-300 rounded-xl">
+                <div className="flex flex-col w-[60%]">
+                    <Image src="/reply-placeholder.webp" alt="reply placeholder" width={800} height={200} />
 
                 </div>
                 <div className="flex flex-col w-[35%] mx-3 justify-center">
